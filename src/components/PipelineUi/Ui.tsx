@@ -9,6 +9,8 @@ import MealNode from "../nodes/MealNode";
 import MealDetailsSidebar from "../common/MealDetailsSidebar";
 import { useFoodGraph } from "../../hooks/useFoodGraph";
 import ViewNode from "../nodes/ViewNode";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const nodeTypes = {
   exploreNode: ExploreNode,
@@ -34,9 +36,12 @@ const FoodExplorer: React.FC = () => {
 
   return (
     <div className="h-screen w-full">
+      <ToastContainer />
+
       <div className="h-12 flex items-center shadow-lg">
         <p className="text-lg font-medium text-gray-700 ms-4">Food Explorer</p>
       </div>
+
       <ReactFlow
         nodes={nodes}
         edges={edges}
@@ -50,6 +55,7 @@ const FoodExplorer: React.FC = () => {
         <Background />
         <Controls />
       </ReactFlow>
+
       <MealDetailsSidebar
         meal={selectedMeal}
         showSelectedMeal={showSelectedMeal}
