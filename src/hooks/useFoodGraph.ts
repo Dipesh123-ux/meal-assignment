@@ -54,12 +54,14 @@ export const useFoodGraph = () => {
           !nodeId.startsWith("view-ingredients-") &&
           !nodeId.startsWith("view-details-")
         ) {
+          setShowSelectedMeal(false);
           clearSiblingNodes(nodeId, edges, nodes, setNodes, setEdges);
         }
 
         const hasChildren = edges.some((edge) => edge.source === nodeId);
 
         if (hasChildren) {
+          setShowSelectedMeal(false);
           bfsDeleteNodes(nodeId, edges, setNodes, setEdges);
         } else {
           if (nodeId === "explore") {
@@ -106,7 +108,16 @@ export const useFoodGraph = () => {
         toast.error("An error occurred while processing the node.");
       }
     },
-    [categories, meals, selectedMeal, edges, nodes, setNodes, setEdges, showSelectedMeal]
+    [
+      categories,
+      meals,
+      selectedMeal,
+      edges,
+      nodes,
+      setNodes,
+      setEdges,
+      showSelectedMeal,
+    ]
   );
 
   return {
