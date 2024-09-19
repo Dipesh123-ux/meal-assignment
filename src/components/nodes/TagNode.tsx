@@ -9,6 +9,7 @@ const TagNode: React.FC<{ data: { label: string } }> = ({ data }) => (
     borderColor="#9333ea"
     Icon={FaTags}
     targetHandle
+    IconBackground="bg-violet-600"
   />
 );
 
