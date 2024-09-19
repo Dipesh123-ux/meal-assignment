@@ -10,6 +10,7 @@ const MealNode: React.FC<{ data: { label: string } }> = ({ data }) => (
     Icon={GiForkKnifeSpoon}
     sourceHandle
     targetHandle
+    IconBackground="bg-sky-500"
   />
 );
 

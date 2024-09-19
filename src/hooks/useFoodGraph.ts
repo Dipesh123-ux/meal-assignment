@@ -11,6 +11,7 @@ import {
   fetchCategories,
   fetchMealDetailsById,
   fetchMealsByCategory,
+  fetchMealsByIngredient,
 } from "../services/foodgraphApi";
 import { bfsDeleteNodes, clearSiblingNodes } from "../helpers/graphHelpers";
 import {
@@ -72,36 +73,52 @@ export const useFoodGraph = () => {
             setCategories(res);
             handleSetCategories(res, setNodes, setEdges);
           } else if (nodeId.startsWith("category-")) {
-            AddViewMealsNode(nodeId, setNodes, setEdges);
-          } else if (nodeId.startsWith("viewmeal-")) {
+            AddViewMealsNode(nodeId, "category", setNodes, setEdges, 400);
+          } else if (nodeId.startsWith("viewmeal-category-")) {
             const cat = nodeId.split("-")[2];
             const res = await fetchMealsByCategory(cat);
             if (res.length === 0) {
               toast.error("No meals found for this category.");
             }
             setMeals(res);
-            handleSetMeals(res, nodeId, setNodes, setEdges);
+            handleSetMeals(res, nodeId, setNodes, setEdges, 800);
+          } else if (nodeId.startsWith("viewmeal-ingredient-")) {
+            const nodeArr = nodeId.split("-");
+            const ingredient = nodeArr[nodeArr.length - 1];
+            const res = await fetchMealsByIngredient(ingredient);
+            if (res.length === 0) {
+              toast.error("No meals found for this ingredient.");
+            }
+            setMeals(res);
+            handleSetMeals(res, nodeId, setNodes, setEdges, 2100);
           } else if (nodeId.startsWith("meal-")) {
-            const mealId = nodeId.split("-")[1];
+            const mealArr = nodeId.split("-");
+            const mealId = mealArr[mealArr.length - 1];
             const res = await fetchMealDetailsById(mealId);
             setSelectedMeal(res);
-            createDetailNodesForMeal(mealId, setNodes, setEdges);
+            createDetailNodesForMeal(nodeId, setNodes, setEdges, 1200);
           } else if (nodeId.startsWith("view-ingredients-")) {
-            const mealId = nodeId.split("-")[2];
             if (!selectedMeal) {
               toast.error("No meal selected to view ingredients.");
               return;
             }
-            handleViewIngredients(mealId, selectedMeal, setNodes, setEdges);
+            handleViewIngredients(
+              nodeId,
+              selectedMeal,
+              setNodes,
+              setEdges,
+              2300
+            );
           } else if (nodeId.startsWith("view-tags-")) {
-            const mealId = nodeId.split("-")[2];
             if (!selectedMeal || !selectedMeal.tags) {
               toast.error("No tags found for this meal.");
               return;
             }
-            handleViewTags(mealId, selectedMeal, setNodes, setEdges);
+            handleViewTags(nodeId, selectedMeal, setNodes, setEdges, 2100);
           } else if (nodeId.startsWith("view-details-")) {
             setShowSelectedMeal(!showSelectedMeal);
+          } else if (nodeId.startsWith("ingredient-")) {
+            AddViewMealsNode(nodeId, "ingredient", setNodes, setEdges, 1800);
           }
         }
       } catch (error) {

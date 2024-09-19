@@ -5,10 +5,11 @@ import BaseNode from "../common/BaseNode";
 const ExploreNode: React.FC<{ data: { label: string } }> = ({ data }) => (
   <BaseNode
     data={data}
-    backgroundColor="#f97316"
-    borderColor="#ea580c"
+    backgroundColor="#fffff"
+    borderColor="#ffffff"
     Icon={FiSearch}
     sourceHandle
+    IconBackground="bg-gray-400"
   />
 );
 

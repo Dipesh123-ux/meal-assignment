@@ -10,6 +10,8 @@ const ViewNode: React.FC<{ data: { label: string } }> = ({ data }) => (
     Icon={FaEye}
     targetHandle
     sourceHandle
+    IconBackground="transparent text-green-400 text-3xl"
+    nodeClass="rounded-3xl"
   />
 );
 

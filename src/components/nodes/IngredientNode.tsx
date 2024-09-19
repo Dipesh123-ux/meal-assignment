@@ -9,6 +9,9 @@ const IngredientNode: React.FC<{ data: { label: string } }> = ({ data }) => (
     borderColor="#ca8a04"
     Icon={GiCarrot}
     targetHandle
+    sourceHandle
+    IconBackground="bg-violet-600"
+
   />
 );
 

@@ -11,3 +11,7 @@ export const fetchMealsByCategory = async (category: string) => {
 export const fetchMealDetailsById = async (id: string) => {
   return await api.getMealDetails(id);
 };
+
+export const fetchMealsByIngredient = async (ingredient: string) => {
+  return await api.getMealsByIngredients(ingredient);
+};

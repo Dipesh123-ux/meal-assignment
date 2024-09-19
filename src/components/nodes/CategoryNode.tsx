@@ -10,6 +10,7 @@ const CategoryNode: React.FC<{ data: { label: string } }> = ({ data }) => (
     Icon={AiOutlineAppstore}
     sourceHandle
     targetHandle
+    IconBackground="bg-red-600"
   />
 );
 

@@ -9,25 +9,27 @@ interface BaseNodeProps {
   Icon: IconType;
   sourceHandle?: boolean;
   targetHandle?: boolean;
+  IconBackground : string;
+  nodeClass? : string;
 }
 
 const BaseNode: React.FC<BaseNodeProps> = ({
   data,
-  backgroundColor,
-  borderColor,
   Icon,
   sourceHandle,
   targetHandle,
+  IconBackground,
+  nodeClass
 }) => (
   <div
-    className={`flex items-center px-4 py-3 shadow-lg rounded-md text-white`}
+    className={`flex items-center px-4 py-3 shadow-xl  rounded-md text-gray-500 ${nodeClass}`}
     style={{
-      backgroundColor,
-      border: `2px solid ${borderColor}`,
+      background : "white",
+      border: `0.5px solid gray`,
     }}
   >
     {targetHandle && <Handle type="target" position={Position.Left} />}
-    <Icon className="mr-2 text-xl" />
+    <Icon className={`mr-2 text-2xl text-white ${IconBackground} p-1 rounded`}/>
     <div className="flex-grow font-semibold">{data.label}</div>
     {sourceHandle && <Handle type="source" position={Position.Right} />}
   </div>
